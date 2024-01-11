@@ -3,7 +3,7 @@
 ### 项目背景
 本项目是一个以网易云音乐为模板，基于SSM的web项目。构建一个集中化的音乐平台，用户可以方便地搜索、收听各种类型的音乐，还提供社交和互动功能，让用户可以与其他音乐爱好者分享音乐、评论和推荐歌曲
 ### 功能说明
-- ![image](https://github.com/JayGJJ/CloudMusic/assets/120771658/e2e0104f-1c72-437b-aace-d5eafc9ad9eb)
+![image](https://github.com/JayGJJ/CloudMusic/assets/120771658/e2e0104f-1c72-437b-aace-d5eafc9ad9eb)
 ### 技术栈
 项目使用到以下框架
 - 后端：Java、Spring，MyBatis，SpringMVC（SSM框架）
