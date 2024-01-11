@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.CommentMapper">
+<!--    手动映射结果集-->
+    <resultMap id="commentMap" type="com.ssm.pojo.Comment">
+        <id column="id" property="id"/>
+        <result column="song_id" property="song_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="content" property="content"/>
+        <result column="created_at" property="created_at"/>
+    </resultMap>
+
+    <resultMap id="commentAndNameMap" type="com.ssm.pojo.CommentAndName">
+        <id column="id" property="id"/>
+        <result column="song_id" property="song_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="content" property="content"/>
+        <result column="created_at" property="created_at"/>
+        <result column="uname" property="uname"/>
+    </resultMap>
+
+    <select id="findCommentBySongId" resultType="com.ssm.pojo.Comment">
+        select * from comment where song_id=#{song_id}
+    </select>
+
+    <select id="findCommentAndNameBySongId" resultMap="commentAndNameMap">
+        SELECT c.*, u.uname FROM comment c JOIN user u ON c.user_id = u.uid WHERE c.song_id = #{song_id}
+    </select>
+
+    <select id="isCollected" resultType="int">
+        SELECT COUNT(*)
+        FROM favorite
+        WHERE user_id = #{user_id} AND song_id = #{song_id};
+    </select>
+
+    <insert id="addComment">
+        insert into comment(user_id,song_id,content)
+        values (#{uid}, #{songid}, #{content})
+    </insert>
+</mapper>

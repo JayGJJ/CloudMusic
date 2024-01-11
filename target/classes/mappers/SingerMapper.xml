@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.SingerMapper">
+<!--    手动创建映射-->
+    <resultMap id="SingerMap" type="com.ssm.pojo.Singer">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="country" property="country"/>
+        <result column="intro" property="intro"/>
+    </resultMap>
+
+
+    <select id="findSingerRandom" resultMap="SingerMap">
+<!--        查找起始位开始的四位歌手-->
+        select * from singer limit #{num},4
+    </select>
+
+    <select id="findAllSinger" resultMap="SingerMap">
+        select * from singer
+    </select>
+</mapper>

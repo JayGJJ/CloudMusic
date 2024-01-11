@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+	<mappers>
+    <!-- 扫描路径下的mapper映射文件 -->
+        <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/SongMapper.xml"/>
+        <mapper resource="mappers/CommentMapper.xml"/>
+        <mapper resource="mappers/AlbumMapper.xml"/>
+        <mapper resource="mappers/SingerMapper.xml"/>
+  	</mappers>
+
+</configuration>

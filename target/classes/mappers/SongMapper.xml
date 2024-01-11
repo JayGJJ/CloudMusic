@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.SongMapper">
+    <select id="findSong" parameterType="com.ssm.pojo.Song" resultType="com.ssm.pojo.Song">
+        select * from song
+        <where>
+            <if test="songid !=null and songid !=''">
+                songid=#{songid}
+            </if>
+            <if test="songname !=null and songname !=''">
+                and songname like '%${songname}%'
+            </if>
+            <if test="singername !=null and singername !=''">
+                and singername like '%${singername}%'
+            </if>
+            <if test="album !=null and album !=''">
+                and album like '%${album}%'
+            </if>
+            <if test="time !=null and time !=''">
+                and time=#{time}
+            </if>
+            <if test="mv !=null and mv !=''">
+                and mv like '%${mv}%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="addSong" parameterType="com.ssm.pojo.Song">
+        insert into song(songname, singername, album, time, mv)
+        values (#{songname}, #{singername}, #{album}, #{time}, #{mv})
+    </insert>
+
+    <delete id="deleteSongById" parameterType="Integer">
+        delete
+        from song
+        where songid = #{songid}
+    </delete>
+
+    <update id="updateSongById" parameterType="com.ssm.pojo.Song">
+        update song
+        set songname=#{songname},
+            singername=#{singername},
+            album=#{album},
+            time=#{time},
+            mv=#{mv}
+        where songid = #{songid}
+    </update>
+    <select id="findSongById" parameterType="Integer" resultType="com.ssm.pojo.Song">
+        select *
+        from song
+        where songid = #{songid}
+    </select>
+
+    <select id="findSongByCount" resultType="com.ssm.pojo.Song">
+        <!--        找出排名前十的歌曲-->
+        select *
+        from song
+        order by time desc
+        limit 10
+    </select>
+
+    <select id="findMySong" resultType="com.ssm.pojo.Song">
+        SELECT s.*
+        FROM user u
+                 JOIN favorite f ON u.uid = f.user_id
+                 JOIN song s ON f.song_id = s.songid
+        WHERE u.uname = #{uname};
+    </select>
+
+    <insert id="collectSong">
+        insert into favorite(user_id, song_id)
+        values (#{uid}, #{songid})
+    </insert>
+
+    <select id="likeSong">
+        UPDATE song SET `like` = `like` + 1 WHERE songid = #{songid};
+    </select>
+</mapper>
